@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang SASIKU - Belanja Harian Jadi Elegan</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Shared Responsive CSS -->
+    <link rel="stylesheet" href="../css/responsive.css">
+
+    <style>
+        /* Custom Fonts */
+        .brand-font {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .solid-text {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Animations */
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slide-up {
+            animation: slide-up 0.8s ease-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* Card Hover Effects */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.15);
+        }
+
+        /* Team Card */
+        .team-card {
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-card img {
+            transition: all 0.5s ease;
+        }
+
+        .team-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .grid-cols-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem !important;
+            }
+            
+            h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                display: none;
+                z-index: 40;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+            
+            .mobile-menu a {
+                display: block;
+                padding: 0.75rem 1rem;
+                color: #4b5563;
+                text-decoration: none;
+                border-radius: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .mobile-menu a:hover {
+                background: #f3f4f6;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-violet-600 to-pink-600 rounded-xl flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">S</span>
+                    </div>
+                    <span class="text-2xl font-bold brand-font gradient-text">SASIKU</span>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8 desktop-nav">
+                    <a href="Sasiku.html" class="text-gray-600 hover:text-purple-600 transition-colors font-medium">Beranda</a>
+                    <a href="#" class="text-purple-600 font-medium">Tentang</a>
+                    <a href="Sasiku.html#products" class="text-gray-600 hover:text-purple-600 transition-colors font-medium">Produk</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="Sasiku.html" class="hidden sm:inline-block px-6 py-2 bg-white text-gray-800 rounded-full font-semibold border border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all">Kembali</a>
+                    <a href="#" class="px-6 py-2 bg-gradient-to-r from-violet-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all">Login</a>
+                    <button class="mobile-menu-btn md:hidden" onclick="toggleMobileMenu()">
+                        <i data-lucide="menu" class="w-6 h-6 text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="Sasiku.html" class="block">Beranda</a>
+            <a href="#" class="block">Tentang</a>
+            <a href="Sasiku.html#products" class="block">Produk</a>
+            <a href="Sasiku.html" class="block">Kembali</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-50 via-white to-pink-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="animate-slide-up">
+                    <span class="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">Tentang Kami</span>
+                    <h1 class="text-4xl md:text-6xl font-bold brand-font leading-tight mb-6">
+                        Mengubah Cara Anda<br>
+                        <span class="gradient-text">Belanja Harian</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        SASIKU hadir untuk memberikan pengalaman belanja yang modern, praktis, dan menyenangkan. 
+                        Dari kebutuhan dapur hingga layanan digital, semua dalam satu platform.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <div class="flex items-center space-x-2 text-gray-600">
+                            <i data-lucide="circle-check" class="w-5 h-5 text-green-500"></i>
+                            <span>Terpercaya</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-600">
+                            <i data-lucide="circle-check" class="w-5 h-5 text-green-500"></i>
+                            <span>Aman</span>
+                        </div>
+                        <div class="flex items-center space-x-2 text-gray-600">
+                            <i data-lucide="circle-check" class="w-5 h-5 text-green-500"></i>
+                            <span>Cepat</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="animate-float">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-r from-violet-400 to-pink-400 rounded-3xl blur-3xl opacity-20"></div>
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop" 
+                             alt="SASIKU Team" 
+                             class="relative rounded-3xl shadow-2xl w-full object-cover h-[400px]">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <span class="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">Cerita Kami</span>
+            <h2 class="text-3xl md:text-4xl font-bold brand-font mb-8">Dari Ide Sederhana Menjadi Solusi Lengkap</h2>
+            <div class="space-y-6 text-gray-600 text-lg leading-relaxed">
+                <p>
+                    SASIKU dimulai dari sebuah ide sederhana: <strong class="text-gray-900">bagaimana membuat belanja harian menjadi lebih mudah dan menyenangkan?</strong> 
+                    Di era digital yang serba cepat, kami percaya bahwa memenuhi kebutuhan sehari-hari seharusnya tidak rumit.
+                </p>
+                <p>
+                    Kami menggabungkan berbagai layanan dalam satu platform terintegrasi. Mulai dari <strong class="text-purple-600">Sasiku Food</strong> untuk kebutuhan dapur, 
+                    <strong class="text-purple-600">Sasiku Hotel</strong> untuk akomodasi, <strong class="text-purple-600">Sasiku Travel</strong> untuk perjalanan, 
+                    <strong class="text-purple-600">Sasiku Kirim</strong> untuk pengiriman, hingga <strong class="text-purple-600">Digital Payment</strong> untuk transaksi yang aman.
+                </p>
+                <p>
+                    Visi kami adalah menjadi bagian dari kehidupan sehari-hari masyarakat Indonesia, memberikan solusi yang tidak hanya praktis tetapi juga 
+                    <strong class="text-purple-600">elegan dan menyenangkan</strong>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-600 via-purple-600 to-pink-600 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="eye" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold brand-font mb-4">Visi Kami</h3>
+                    <p class="text-purple-100 leading-relaxed">
+                        Menjadi platform lifestyle terintegrasi nomor satu di Indonesia yang mengubah cara masyarakat memenuhi kebutuhan harian 
+                        dengan pengalaman yang modern, praktis, dan menyenangkan.
+                    </p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20">
+                    <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="target" class="w-7 h-7"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold brand-font mb-4">Misi Kami</h3>
+                    <ul class="space-y-3 text-purple-100">
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="check" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Menyediakan layanan all-in-one untuk kebutuhan harian</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="check" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Memberikan pengalaman pengguna yang elegan dan intuitif</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="check" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Menjaga kualitas dan keamanan setiap transaksi</span>
+                        </li>
+                        <li class="flex items-start space-x-3">
+                            <i data-lucide="check" class="w-5 h-5 mt-0.5 flex-shrink-0"></i>
+                            <span>Berkontribusi pada pertumbuhan ekonomi digital Indonesia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features/Values -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">Nilai Kami</span>
+                <h2 class="text-3xl md:text-4xl font-bold brand-font mb-4">Mengapa Memilih SASIKU?</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Kami berkomitmen memberikan yang terbaik untuk setiap pengguna</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="feature-card bg-white rounded-3xl p-8 border border-purple-50">
+                    <div class="w-14 h-14 bg-gradient-to-br from-violet-100 to-purple-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-7 h-7 text-violet-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold brand-font mb-3">Cepat & Praktis</h3>
+                    <p class="text-gray-500 leading-relaxed">
+                        Proses transaksi yang cepat dan antarmuka yang intuitif membuat belanja jadi lebih efisien.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-3xl p-8 border border-purple-50">
+                    <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-rose-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="shield-check" class="w-7 h-7 text-pink-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold brand-font mb-3">Aman & Terpercaya</h3>
+                    <p class="text-gray-500 leading-relaxed">
+                        Sistem keamanan tingkat tinggi melindungi setiap transaksi dan data pribadi Anda.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-3xl p-8 border border-purple-50">
+                    <div class="w-14 h-14 bg-gradient-to-br from-amber-100 to-orange-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="smile" class="w-7 h-7 text-amber-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold brand-font mb-3">Pengalaman Menyenangkan</h3>
+                    <p class="text-gray-500 leading-relaxed">
+                        Desain yang elegan dan fitur yang lengkap membuat setiap interaksi menjadi menyenangkan.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-3xl p-8 border border-purple-50">
+                    <div class="w-14 h-14 bg-gradient-to-br from-cyan-100 to-blue-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="layers" class="w-7 h-7 text-cyan-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold brand-font mb-3">All-in-One Platform</h3>
+                    <p class="text-gray-500 leading-relaxed">
+                        Semua kebutuhan harian dalam satu aplikasi. Tidak perlu lagi berpindah-pindah platform.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-3xl p-8 border border-purple-50">
+                    <div class="w-14 h-14 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="trending-up" class="w-7 h-7 text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold brand-font mb-3">Terus Berkembang</h3>
+                    <p class="text-gray-500 leading-relaxed">
+                        Kami terus berinovasi dan menambah fitur baru untuk memenuhi kebutuhan Anda.
+                    </p>
+                </div>
+
+                <div class="feature-card bg-white rounded-3xl p-8 border border-purple-50">
+                    <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-indigo-100 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="headphones" class="w-7 h-7 text-purple-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold brand-font mb-3">Support 24/7</h3>
+                    <p class="text-gray-500 leading-relaxed">
+                        Tim customer service kami siap membantu Anda kapan saja dengan respons yang cepat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">Statistik</span>
+                <h2 class="text-3xl md:text-4xl font-bold brand-font mb-4">Angka yang Bicara</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Pencapaian kami dalam melayani masyarakat Indonesia</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold gradient-text brand-font mb-2">1000+</div>
+                    <p class="text-gray-500">Produk Tersedia</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold gradient-text brand-font mb-2">50K+</div>
+                    <p class="text-gray-500">Pengguna Aktif</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold gradient-text brand-font mb-2">30min</div>
+                    <p class="text-gray-500">Rata-rata Pengiriman</p>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl md:text-5xl font-bold gradient-text brand-font mb-2">4.9</div>
+                    <p class="text-gray-500">Rating Pengguna</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Overview -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-violet-50 via-white to-pink-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-semibold mb-4">Layanan Kami</span>
+                <h2 class="text-3xl md:text-4xl font-bold brand-font mb-4">Ekosistem SASIKU</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Solusi lengkap untuk setiap kebutuhan harian Anda</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <a href="../Sasiku_hotel/Sasiku_hotel.html" class="group bg-white rounded-3xl p-6 border border-purple-50 hover:border-purple-200 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 bg-gradient-to-br from-violet-100 to-purple-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="hotel" class="w-6 h-6 text-violet-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold brand-font mb-2">Sasiku Hotel</h3>
+                    <p class="text-gray-500 text-sm">Booking penginapan dengan mudah dan harga terbaik</p>
+                </a>
+
+                <a href="../Sasiku_Travel/Sasiku_travel.html" class="group bg-white rounded-3xl p-6 border border-purple-50 hover:border-purple-200 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 bg-gradient-to-br from-pink-100 to-rose-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="plane" class="w-6 h-6 text-pink-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold brand-font mb-2">Sasiku Travel</h3>
+                    <p class="text-gray-500 text-sm">Perjalanan nyaman dengan berbagai pilihan destinasi</p>
+                </a>
+
+                <a href="../Sasiku_Food/Sasiku_Food.html" class="group bg-white rounded-3xl p-6 border border-purple-50 hover:border-purple-200 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 bg-gradient-to-br from-cyan-100 to-blue-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="store" class="w-6 h-6 text-cyan-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold brand-font mb-2">Sasiku Food</h3>
+                    <p class="text-gray-500 text-sm">Belanja kebutuhan dapur dan makanan segar</p>
+                </a>
+
+                <a href="../Sasiku_Kirim/sasiku_kirim.html" class="group bg-white rounded-3xl p-6 border border-purple-50 hover:border-purple-200 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 bg-gradient-to-br from-green-100 to-emerald-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="truck" class="w-6 h-6 text-green-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold brand-font mb-2">Sasiku Kirim</h3>
+                    <p class="text-gray-500 text-sm">Layanan pengiriman cepat dan terpercaya</p>
+                </a>
+
+                <div class="group bg-white rounded-3xl p-6 border border-purple-50 hover:border-purple-200 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 bg-gradient-to-br from-amber-100 to-orange-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="credit-card" class="w-6 h-6 text-amber-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold brand-font mb-2">Digital Payment</h3>
+                    <p class="text-gray-500 text-sm">Transaksi digital yang aman dan praktis</p>
+                </div>
+
+                <a href="../LJU_het.html" class="group bg-white rounded-3xl p-6 border border-purple-50 hover:border-purple-200 transition-all hover:shadow-xl">
+                    <div class="w-12 h-12 bg-gradient-to-br from-rose-100 to-red-100 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <i data-lucide="grid-3x3" class="w-6 h-6 text-rose-600"></i>
+                    </div>
+                    <h3 class="text-lg font-bold brand-font mb-2">KDMP</h3>
+                    <p class="text-gray-500 text-sm">Platform digital marketplace produk</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-20">
+                <div class="absolute top-10 left-10 w-32 h-32 bg-purple-500 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-10 right-10 w-32 h-32 bg-pink-500 rounded-full blur-3xl"></div>
+            </div>
+            
+            <div class="relative z-10">
+                <h2 class="text-3xl md:text-4xl font-bold text-white brand-font mb-6">Siap Mengalami Belanja yang Berbeda?</h2>
+                <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">
+                    Bergabunglah dengan ribuan pengguna lainnya dan rasakan kemudahan belanja harian dengan SASIKU.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="Sasiku.html" class="px-8 py-4 bg-gradient-to-r from-violet-600 to-pink-600 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-purple-500/30 transition-all">
+                        Mulai Belanja
+                    </a>
+                    <a href="#" class="px-8 py-4 bg-white/10 backdrop-blur text-white rounded-full font-semibold border border-white/20 hover:bg-white/20 transition-all">
+                        Hubungi Kami
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-violet-600 to-pink-600 rounded-xl flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">S</span>
+                        </div>
+                        <span class="text-2xl font-bold brand-font gradient-text">SASIKU</span>
+                    </div>
+                    <p class="text-gray-500 text-sm">Belanja harian jadi elegan dengan pengalaman modern.</p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 brand-font">Layanan</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="../Sasiku_hotel/Sasiku_hotel.html" class="hover:text-purple-600 transition-colors">Sasiku Hotel</a></li>
+                        <li><a href="../Sasiku_Travel/Sasiku_travel.html" class="hover:text-purple-600 transition-colors">Sasiku Travel</a></li>
+                        <li><a href="../Sasiku_Food/Sasiku_Food.html" class="hover:text-purple-600 transition-colors">Sasiku Food</a></li>
+                        <li><a href="../Sasiku_Kirim/sasiku_kirim.html" class="hover:text-purple-600 transition-colors">Sasiku Kirim</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 brand-font">Perusahaan</h4>
+                    <ul class="space-y-2 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-purple-600 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition-colors">Karir</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition-colors">Blog</a></li>
+                        <li><a href="#" class="hover:text-purple-600 transition-colors">Kontak</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold mb-4 brand-font">Ikuti Kami</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors">
+                            <i data-lucide="instagram" class="w-5 h-5 text-gray-600"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors">
+                            <i data-lucide="facebook" class="w-5 h-5 text-gray-600"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center hover:bg-purple-100 transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5 text-gray-600"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-100 mt-12 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2026 SASIKU. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
+</body>
+</html>

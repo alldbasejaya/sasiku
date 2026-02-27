@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Bantuan - SASIKU Travel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'montserrat': ['Montserrat', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                        'poppins': ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        'ocean': '#0066CC',
+                        'ocean-light': '#4A90E2',
+                        'sunset': '#FF6B35',
+                        'forest': '#2D5A3D',
+                        'forest-light': '#4A7C59',
+                        'coral': '#FF7F7F',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; }
+        .gradient-text {
+            background: linear-gradient(135deg, #0066CC, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #0066CC, #FF6B35);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+        }
+        .help-card {
+            transition: all 0.3s ease;
+        }
+        .help-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+        .faq-item {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-item:hover {
+            background: #f8fafc;
+        }
+
+        /* Products Dropdown */
+        .products-dropdown:hover .products-dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+        .products-dropdown:hover .dropdown-trigger i {
+            transform: rotate(180deg);
+        }
+        
+        /* Mobile Navigation Styles */
+        .mobile-menu-btn {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 1rem;
+                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+                display: none;
+                z-index: 40;
+            }
+            
+            .mobile-menu.active {
+                display: block;
+            }
+            
+            .mobile-menu a {
+                display: block;
+                padding: 0.75rem 1rem;
+                color: #4b5563;
+                text-decoration: none;
+                border-radius: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .mobile-menu a:hover {
+                background: #f3f4f6;
+            }
+            
+            h1 {
+                font-size: 2rem !important;
+            }
+            
+            h2 {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.75rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-slate-50">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="window.location.href='Sasiku_travel.html'">
+                    <div class="w-12 h-12 bg-gradient-to-br from-ocean to-sunset rounded-2xl flex items-center justify-center shadow-lg">
+                        <i class="fas fa-paper-plane text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl md:text-2xl font-playfair font-bold gradient-text">SASIKU</h1>
+                        <p class="text-xs text-gray-500 font-montserrat tracking-widest hidden sm:block">EXPLORE THE WORLD</p>
+                    </div>
+                </div>
+
+                <div class="hidden md:flex items-center space-x-8 desktop-nav">
+                    <a href="../sasiku/Sasiku.html" class="font-montserrat font-medium text-gray-700 hover:text-ocean transition-colors">Beranda</a>
+                    <a href="Sasiku_travel.html" class="font-montserrat font-medium text-ocean transition-colors">Travel</a>
+                    <div class="products-dropdown relative">
+                        <div class="dropdown-trigger cursor-pointer font-montserrat font-medium text-gray-700 hover:text-ocean transition-colors flex items-center gap-1">
+                            <span>Produk</span>
+                            <i class="fas fa-chevron-down text-xs transition-transform"></i>
+                        </div>
+                        <div class="products-dropdown-menu absolute top-full left-1/2 -translate-x-1/2 translate-y-2 bg-white rounded-2xl shadow-2xl p-3 min-w-[200px] opacity-0 invisible transition-all z-50 mt-2">
+                            <a href="#" class="block flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-ocean/10 transition-all -mb-1">
+                                <i class="fas fa-plane text-ocean text-lg"></i>
+                                <span class="text-gray-700 font-medium">Tiket Pesawat</span>
+                            </a>
+                            <a href="#" class="block flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-forest/10 transition-all -mb-1">
+                                <i class="fas fa-train text-forest text-lg"></i>
+                                <span class="text-gray-700 font-medium">Tiket Kereta</span>
+                            </a>
+                            <a href="#" class="block flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-cyan-600/10 transition-all">
+                                <i class="fas fa-ship text-cyan-600 text-lg"></i>
+                                <span class="text-gray-700 font-medium">Tiket Kapal</span>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="promo.html" class="font-montserrat font-medium text-gray-700 hover:text-sunset transition-colors">Promo</a>
+                    <a href="cek-pesanan.html" class="font-montserrat font-medium text-gray-700 hover:text-forest transition-colors">Cek Pesanan</a>
+                    <a href="bantuan.html" class="font-montserrat font-medium text-coral transition-colors">Bantuan</a>
+                </div>
+
+                <div class="flex items-center space-x-4">
+                    <a href="../sasiku/Sasiku.html" class="hidden sm:inline-block px-6 py-2 bg-white text-gray-800 rounded-full font-semibold border border-gray-200 hover:border-purple-300 hover:shadow-lg transition-all">Kembali</a>
+                    <a href="#" class="btn-primary px-6 py-2.5 rounded-full text-white font-montserrat font-semibold text-sm shadow-lg hidden sm:inline-block">Login</a>
+                    <button class="mobile-menu-btn md:hidden" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="../sasiku/Sasiku.html" class="block">Beranda</a>
+            <a href="Sasiku_travel.html" class="block">Travel</a>
+            <a href="promo.html" class="block">Promo</a>
+            <a href="cek-pesanan.html" class="block">Cek Pesanan</a>
+            <a href="#" class="block">Login</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 bg-gradient-to-br from-coral-50 via-pink-50 to-purple-50">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block px-6 py-3 bg-gradient-to-r from-ocean to-sunset text-white rounded-full font-semibold mb-6">
+                <i class="fas fa-headset mr-2"></i>Pusat Bantuan
+            </div>
+            <h1 class="text-5xl md:text-6xl font-playfair font-bold text-gray-900 mb-6">
+                Kami Siap Membantu Anda
+            </h1>
+            <p class="text-xl text-gray-600">
+                Temukan jawaban untuk pertanyaan Anda atau hubungi tim support kami
+            </p>
+
+            <!-- Search Bar -->
+            <div class="mt-10">
+                <div class="max-w-2xl mx-auto relative">
+                    <input type="text" placeholder="Cari bantuan (contoh: cara booking, refund, dll)" 
+                           class="w-full px-8 py-5 rounded-full border-2 border-gray-200 focus:outline-none focus:border-ocean focus:ring-4 focus:ring-ocean/10 text-lg shadow-lg">
+                    <button class="absolute right-2 top-2 bg-gradient-to-r from-ocean to-sunset text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all">
+                        <i class="fas fa-search mr-2"></i>Cari
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Options -->
+    <section class="py-20 px-4 -mt-10">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Phone Support -->
+                <div class="help-card bg-white rounded-3xl p-8 shadow-xl text-center border-2 border-transparent hover:border-ocean/30">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-ocean to-ocean-light rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-phone text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Telepon</h3>
+                    <p class="text-gray-600 mb-4">Hubungi kami langsung untuk bantuan cepat</p>
+                    <div class="bg-ocean/10 rounded-xl p-4 mb-6">
+                        <p class="text-3xl font-bold text-ocean">08155010346</p>
+                        <p class="text-sm text-gray-500 mt-2"><i class="fas fa-clock mr-1"></i>24/7 Customer Service</p>
+                    </div>
+                    <a href="tel:08001234567" class="block w-full bg-ocean text-white py-3 rounded-xl font-semibold hover:bg-ocean-light transition-all">
+                        <i class="fas fa-phone-alt mr-2"></i>Hubungi Sekarang
+                    </a>
+                </div>
+
+                <!-- Email Support -->
+                <div class="help-card bg-white rounded-3xl p-8 shadow-xl text-center border-2 border-transparent hover:border-sunset/30">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-sunset to-sunset-light rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-envelope text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Email</h3>
+                    <p class="text-gray-600 mb-4">Kirim pertanyaan detail Anda via email</p>
+                    <div class="bg-sunset/10 rounded-xl p-4 mb-6">
+                        <p class="text-xl font-bold text-sunset break-all">support@sasiku-travel.com</p>
+                        <p class="text-sm text-gray-500 mt-2"><i class="fas fa-clock mr-1"></i>Respon dalam 1x24 jam</p>
+                    </div>
+                    <a href="mailto:support@sasiku-travel.com" class="block w-full bg-sunset text-white py-3 rounded-xl font-semibold hover:bg-sunset-light transition-all">
+                        <i class="fas fa-paper-plane mr-2"></i>Kirim Email
+                    </a>
+                </div>
+
+                <!-- Live Chat -->
+                <div class="help-card bg-white rounded-3xl p-8 shadow-xl text-center border-2 border-transparent hover:border-forest/30">
+                    <div class="w-20 h-20 mx-auto bg-gradient-to-br from-forest to-forest-light rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-comments text-3xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-3">Live Chat</h3>
+                    <p class="text-gray-600 mb-4">Chat langsung dengan agent kami</p>
+                    <div class="bg-forest/10 rounded-xl p-4 mb-6">
+                        <div class="flex items-center justify-center gap-2">
+                            <span class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                            <p class="text-lg font-bold text-forest">Online Sekarang</p>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-2"><i class="fas fa-clock mr-1"></i>Waktu tunggu: < 2 menit</p>
+                    </div>
+                    <button onclick="openChat()" class="block w-full bg-forest text-white py-3 rounded-xl font-semibold hover:bg-forest-light transition-all">
+                        <i class="fas fa-comment-dots mr-2"></i>Mulai Chat
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Help Categories -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-gray-900 mb-4">Kategori Bantuan</h2>
+                <p class="text-gray-600">Pilih topik yang sesuai dengan kebutuhan Anda</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <a href="#" class="help-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-6 border-2 border-blue-200 hover:border-blue-400">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-blue-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-ticket-alt text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg">Pemesanan Tiket</h3>
+                            <p class="text-sm text-gray-600">Cara booking & perubahan</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="help-card bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-6 border-2 border-green-200 hover:border-green-400">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-credit-card text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg">Pembayaran</h3>
+                            <p class="text-sm text-gray-600">Metode & konfirmasi</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="help-card bg-gradient-to-br from-orange-50 to-orange-100 rounded-2xl p-6 border-2 border-orange-200 hover:border-orange-400">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-orange-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-undo text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg">Refund & Pembatalan</h3>
+                            <p class="text-sm text-gray-600">Kebijakan & proses</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="help-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-6 border-2 border-purple-200 hover:border-purple-400">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-purple-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-calendar-check text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg">Jadwal Perjalanan</h3>
+                            <p class="text-sm text-gray-600">Info jadwal & delay</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="help-card bg-gradient-to-br from-pink-50 to-pink-100 rounded-2xl p-6 border-2 border-pink-200 hover:border-pink-400">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-pink-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-user text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg">Akun Saya</h3>
+                            <p class="text-sm text-gray-600">Login & profil</p>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="#" class="help-card bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-2xl p-6 border-2 border-cyan-200 hover:border-cyan-400">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-gift text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 text-lg">Promo & Voucher</h3>
+                            <p class="text-sm text-gray-600">Cara pakai & syarat</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20 px-4 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-gray-900 mb-4">Pertanyaan Umum</h2>
+                <p class="text-gray-600">Jawaban untuk pertanyaan yang sering diajukan</p>
+            </div>
+
+            <div class="space-y-4">
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden faq-item" onclick="toggleFaq(this)">
+                    <div class="p-6 flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 pr-4">
+                            <i class="fas fa-question-circle text-ocean mr-3"></i>Bagaimana cara melakukan pemesanan?
+                        </h3>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+                    </div>
+                    <div class="hidden px-6 pb-6 text-gray-600 ml-12">
+                        <p class="mb-3">Untuk melakukan pemesanan, ikuti langkah berikut:</p>
+                        <ol class="list-decimal ml-4 space-y-2">
+                            <li>Pilih jenis layanan (pesawat, kereta, atau kapal)</li>
+                            <li>Masukkan rute dan tanggal perjalanan</li>
+                            <li>Pilih jadwal yang tersedia</li>
+                            <li>Isi data penumpang</li>
+                            <li>Lakukan pembayaran</li>
+                            <li>E-ticket akan dikirim ke email Anda</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden faq-item" onclick="toggleFaq(this)">
+                    <div class="p-6 flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 pr-4">
+                            <i class="fas fa-question-circle text-ocean mr-3"></i>Apa saja metode pembayaran yang tersedia?
+                        </h3>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+                    </div>
+                    <div class="hidden px-6 pb-6 text-gray-600 ml-12">
+                        <p class="mb-3">Kami menerima berbagai metode pembayaran:</p>
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>Transfer Bank (BCA, Mandiri, BNI, BRI)</li>
+                            <li>Kartu Kredit/Debit (Visa, Mastercard)</li>
+                            <li>E-Wallet (GoPay, OVO, Dana, ShopeePay)</li>
+                            <li>Virtual Account</li>
+                            <li>QRIS</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden faq-item" onclick="toggleFaq(this)">
+                    <div class="p-6 flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 pr-4">
+                            <i class="fas fa-question-circle text-ocean mr-3"></i>Bagaimana kebijakan refund/pembatalan?
+                        </h3>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+                    </div>
+                    <div class="hidden px-6 pb-6 text-gray-600 ml-12">
+                        <p class="mb-3">Kebijakan refund bervariasi tergantung penyedia layanan:</p>
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li><strong>Pesawat:</strong> Refund 50-80% tergantung maskapai dan kelas tiket</li>
+                            <li><strong>Kereta:</strong> Refund 75% jika dibatalkan H-3</li>
+                            <li><strong>Kapal:</strong> Refund 50% jika dibatalkan H-2</li>
+                        </ul>
+                        <p class="mt-3">Proses refund memakan waktu 7-14 hari kerja.</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden faq-item" onclick="toggleFaq(this)">
+                    <div class="p-6 flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 pr-4">
+                            <i class="fas fa-question-circle text-ocean mr-3"></i>Bisakah saya mengubah jadwal setelah booking?
+                        </h3>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+                    </div>
+                    <div class="hidden px-6 pb-6 text-gray-600 ml-12">
+                        <p class="mb-3">Perubahan jadwal dapat dilakukan dengan ketentuan:</p>
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>Maksimal 24 jam sebelum keberangkatan</li>
+                            <li>Biaya perubahan tergantung kebijakan penyedia</li>
+                            <li>Selisi harga tiket akan dikenakan</li>
+                            <li>Hubungi customer service untuk proses perubahan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden faq-item" onclick="toggleFaq(this)">
+                    <div class="p-6 flex items-center justify-between cursor-pointer">
+                        <h3 class="font-bold text-lg text-gray-900 pr-4">
+                            <i class="fas fa-question-circle text-ocean mr-3"></i>Bagaimana jika terjadi delay atau pembatalan dari penyedia?
+                        </h3>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform"></i>
+                    </div>
+                    <div class="hidden px-6 pb-6 text-gray-600 ml-12">
+                        <p class="mb-3">Jika terjadi delay atau pembatalan dari penyedia layanan:</p>
+                        <ul class="list-disc ml-4 space-y-2">
+                            <li>Kami akan segera menginformasikan via email/SMS</li>
+                            <li>Anda dapat memilih reschedule atau full refund</li>
+                            <li>Untuk delay > 4 jam, kompensasi akan diberikan sesuai regulasi</li>
+                            <li>Tim kami akan membantu proses klaim kompensasi</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="py-20 px-4 bg-white">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-playfair font-bold text-gray-900 mb-4">Kirim Pesan</h2>
+                <p class="text-gray-600">Isi form di bawah ini dan tim kami akan segera menghubungi Anda</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-3xl p-8 shadow-xl">
+                <form onsubmit="submitForm(event)">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Nama Lengkap</label>
+                            <input type="text" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-ocean focus:ring-4 focus:ring-ocean/10">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email</label>
+                            <input type="email" required class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-ocean focus:ring-4 focus:ring-ocean/10">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Subjek</label>
+                        <select class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-ocean focus:ring-4 focus:ring-ocean/10">
+                            <option>Pilih subjek...</option>
+                            <option>Pemesanan Tiket</option>
+                            <option>Pembayaran</option>
+                            <option>Refund & Pembatalan</option>
+                            <option>Jadwal Perjalanan</option>
+                            <option>Lainnya</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Kode Booking (Opsional)</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-ocean focus:ring-4 focus:ring-ocean/10 uppercase" placeholder="ABC123456">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">Pesan</label>
+                        <textarea required rows="5" class="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:outline-none focus:border-ocean focus:ring-4 focus:ring-ocean/10 resize-none" placeholder="Jelaskan pertanyaan atau masalah Anda..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full btn-primary text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all">
+                        <i class="fas fa-paper-plane mr-2"></i>Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-ocean to-sunset rounded-2xl flex items-center justify-center shadow-lg">
+                            <i class="fas fa-paper-plane text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-playfair font-bold gradient-text">SASIKU</h1>
+                            <p class="text-xs text-gray-400 font-montserrat tracking-widest">EXPLORE THE WORLD</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm">Wujudkan perjalanan impianmu dengan SASIKU Travel.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Layanan</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../sasiku/Sasiku.html" class="hover:text-white transition-colors">Beranda</a></li>
+                        <li><a href="promo.html" class="hover:text-white transition-colors">Promo</a></li>
+                        <li><a href="cek-pesanan.html" class="hover:text-white transition-colors">Cek Pesanan</a></li>
+                        <li><a href="bantuan.html" class="hover:text-white transition-colors">Bantuan</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Kontak</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><i class="fas fa-envelope w-4"></i> support@sasiku-travel.com</li>
+                        <li><i class="fas fa-phone w-4"></i> 0800-123-4567</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Sosial Media</h4>
+                    <div class="flex gap-3">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-ocean transition-colors"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-ocean transition-colors"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-ocean transition-colors"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2026 SASIKU Travel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+        
+        function toggleFaq(element) {
+            const answer = element.querySelector('div.hidden');
+            const icon = element.querySelector('.fa-chevron-down');
+
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function openChat() {
+            alert('Live Chat akan segera tersedia! Anda akan diarahkan ke WhatsApp customer service kami.');
+            window.open('https://wa.me/+628155010346', '_blank');
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            alert('Terima kasih! Pesan Anda telah terkirim. Tim kami akan menghubungi Anda dalam 1x24 jam.');
+            event.target.reset();
+        }
+    </script>
+
+</body>
+</html>
